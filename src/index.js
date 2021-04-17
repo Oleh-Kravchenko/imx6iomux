@@ -38,7 +38,14 @@ const PCfgComponent = React.memo(() => {
 	<label htmlFor="pcfg" className="col-sm-2 col-form-label">Pin Configuration</label>
 	<div className="col-sm-4">
 		<input type="text" className="form-control"
-			onChange={event => dispatch({ pcfg: parseInt(event.target.value, 16) })}
+			onChange={event => {
+				var num = parseInt(event.target.value, 16);
+
+				if (!isNaN(num))
+					dispatch({ pcfg: parseInt(event.target.value, 16) });
+				else
+					dispatch({ pcfg: state.pcfg });
+			}}
 			value={state.pcfg.toString(16)}
 		/>
 	</div>
